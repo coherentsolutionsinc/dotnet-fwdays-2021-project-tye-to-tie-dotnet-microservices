@@ -1,0 +1,4 @@
+### A template request. The port value has to be replaced with a real port 
+### obtained from Tye dashboard.
+
+https://localhost:51291/weatherforecast

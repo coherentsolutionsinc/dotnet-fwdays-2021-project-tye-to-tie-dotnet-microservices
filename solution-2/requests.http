@@ -1,0 +1,9 @@
+### These requiests have predefined port values to simplify demonstration
+
+### Request to source-api service
+
+http://localhost:8800/weatherforecast
+
+### Request to containerized-api service
+
+http://localhost:8801/weatherforecast

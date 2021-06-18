@@ -1,0 +1,23 @@
+# tye application configuration file
+# read all about it at https://github.com/dotnet/tye
+#
+# when you've given us a try, we'd love to know what you think:
+#    https://aka.ms/AA7q20u
+#
+name: companion-solution
+services:
+- name: source-api
+  project: source-api/source-api.csproj
+  bindings:
+  - port: 8802
+- name: companion-source-api
+  repository: https://github.com/coherentsolutionsinc/dotnet-fwdays-2021-project-tye-to-tie-dotnet-microservices-companion
+ingress:
+- name: app-ingress
+  bindings:
+  - port: 8803
+  rules:
+  - host: app.source-api.com
+    service: source-api
+  - host: app.companion-source-api.com
+    service: companion-source-api

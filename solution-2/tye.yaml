@@ -1,0 +1,13 @@
+name: solution
+services:
+- name: source-api
+  project: source-api/source-api.csproj
+  bindings:
+    - protocol: http
+      port: 8800
+- name: containerized-api
+  dockerFile: containerized-api/Dockerfile
+  bindings:
+    - protocol: http
+      port: 8801
+      containerPort: 5000
