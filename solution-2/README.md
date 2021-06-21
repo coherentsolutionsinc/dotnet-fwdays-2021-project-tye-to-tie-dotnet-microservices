@@ -61,5 +61,5 @@ Please ensure to install:
         * `kubectl get service`
     * Establish port forwarding for `companion-source-api` 
         * `kubectl port-forward svc/companion-source-api 8800:8800`
-18. Open to `request.http` and execute request to `companion-containerized-api`.
+18. Open `request.http` and execute request to `companion-containerized-api`.
 19. Execute `tye undeploy`.
