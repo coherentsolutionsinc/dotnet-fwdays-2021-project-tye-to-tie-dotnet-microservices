@@ -15,8 +15,23 @@ The solution contains:
 ## Details
 
 * `companion-containerized-api` service is built from `companion-containerized-api/Dockerfile`.
-* `companion-source-api` service is built from C# source code.
-* Requests from `request.http` can be executed by [REST Client](https://github.com/Huachao/vscode-restclient) extension for Visual Studio Code.
+* `companion-source-api` service is built from `companion-source-api/companion-source-api.csproj`.
+
+## Prerequisites
+
+Please ensure to install:
+
+* [REST Client](https://github.com/Huachao/vscode-restclient) extension for Visual Studio Code.
+
+> Developer's comment 
+>
+> This is required to execute requests from `request.http` file.
+
+* [Docker](https://github.com/microsoft/vscode-docker) extension for Visual Studio Code.
+
+> Developer's comment
+> 
+> This is required to debug service containers
 
 ## Demo
 
@@ -42,7 +57,9 @@ The solution contains:
     * CTRL+C to cancel `tye run`.
 15. Execute `tye deploy -i` (specify required container registry).
 16. Use `kubectl` to
-    * Get services (`kubectl get service`)
-    * Establish port forwarding for `companion-source-api` (`kubectl port-forward svc/companion-source-api 8800:8800`).
+    * View services
+        * `kubectl get service`
+    * Establish port forwarding for `companion-source-api` 
+        * `kubectl port-forward svc/companion-source-api 8800:8800`
 18. Open to `request.http` and execute request to `companion-containerized-api`.
 19. Execute `tye undeploy`.
