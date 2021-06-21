@@ -1,6 +1,6 @@
 # "Project Tye to Tie Micro-services" (Solution #2)
 
-Solution demonstrated how `tye` can be used to run, deploy & debug solution of two microservices, when one service is built from C# source files and another one is built from Dockerfile.
+Solution demonstrated how `tye` can be used to run, deploy & debug a solution of two microservices, when one service is built from C# source files and another one is built from Dockerfile.
 
 ## Content
 
@@ -8,7 +8,7 @@ The solution contains:
 
 * **.vscode/launch.json** - launch configuration for Docker container debugging (used in demo to debug `companion-containerized-api` service).
 * **companion-containerized-api** - a .NET 5 service to generate random weather forecast information. 
-* **companion-source-api** - a .NET 5 service which enriches weather forecast obtained from `companion-containerized-api` service city information. 
+* **companion-source-api** - a .NET 5 service which enriches weather forecast obtained from `companion-containerized-api` service with city information. 
 * **request.http** - a list of requests for the application (used in demo). 
 * **tye.yaml** - configuration of `tye` tool.
 
