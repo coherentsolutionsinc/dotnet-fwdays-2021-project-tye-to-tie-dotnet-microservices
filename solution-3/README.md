@@ -19,6 +19,24 @@ The solution contains:
 * **tye.yaml** - configuration of `tye` tool to consume `companion-containerized-api` and `companion-source-api` services as services from the same solution located in separate repository.
 * **tye-external.yaml** - configuration of `tye` tool to consume `companion-containerized-api` and `companion-source-api` services as external services from the different solution, deployed separately.
 
+## Prerequisites
+
+Please ensure to install:
+
+* [REST Client](https://github.com/Huachao/vscode-restclient) extension for Visual Studio Code.
+
+> Developer's comment 
+>
+> This is required to execute requests from `request.http` file.
+
+* [Docker](https://github.com/microsoft/vscode-docker) extension for Visual Studio Code.
+
+> Developer's comment
+> 
+> This is required to debug service containers
+
+* [Project Tye](https://github.com/dotnet/tye) is installed and getting started [tutorial](https://github.com/dotnet/tye/blob/main/docs/tutorials/hello-tye/00_run_locally.md) is finished.
+
 ## Demo (Scenario 1)
 
 1. Take a look at `tye.yaml`. 
