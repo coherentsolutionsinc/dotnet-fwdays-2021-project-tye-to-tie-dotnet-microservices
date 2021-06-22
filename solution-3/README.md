@@ -1,24 +1,103 @@
 # "Project Tye to Tie Micro-services" (Solution #3)
 
-This repository contains a solution demonstrated on .NET fwdays'21 conference on 2021-08-07. This solution demonstrates how Tye can be used to run, deploy & debug three micro-services: one, built from sources and other two (one from sources and one from Dockerfile) located on separate GibHub repository.
+Solution demonstrates how `tye` can be used to run, deploy & debug three micro-services spread across two Git repositories - one, built from C# sources in the first repository and two (one from C# sources and one from Dockerfile) in the second repository.
 
-Here is repository structure:
+Solution demonstrates two scenarios:
 
-1. `.vscode/launch.json` - contains a Docker debug configuration which can be used to debug `companion-containerized-api`. Pay attention to source mapping.
-3. `source-api` - a weather forecast service which calls weather forecast API of `companion-source-api` and enriches response with city information. This service is built from sources.
-4. `request.http` - contains predefined requests for testing the application. These requests can be executed by (REST Client)[https://github.com/Huachao/vscode-restclient] for Visual Studio Code.
-5. `tye.yaml` - contains configuration for `tye` command tool.
+1. When `companion-*` services are treated as part of the same solution as `source-api` service. So run & deployment are acting on these services as whole.
+2. When `companion-*` services are treated as external services from different solution. So run & deployment are acting on these services as they should already exist.
 
-Here is a demo scenario:
+## Content
 
-1. Take a look at `tye.yaml`. Pay attention to fixed ports in `bindings` (which are required to simplify demonstration by using `requests.http`). Pay attention to `repository` configuration. Pay attention that `name` in this `tye.yaml` should match `name` in referenced repository. Pay attention to ingress.
-2. Take a look at `source-api/Startup.cs`. Pay attention to usage of Tye extension method for configuration.
-3. Execute `tye run` command. Open (Project Tye Extension)[https://github.com/Microsoft/vscode-tye/]. Pay attention to `.tye/deps` directory. Demonstrate dashboard. Pay attention to ingress.
-4. Navigate to `request.http`. Execute requests to `companion-containerized-api`, `companion-source-api` and `source-api`. Pay attention to differences. Execute requests to `companion-source-api` and `source-api` through ingress. Pay attention to `Host` configuration.
-5. Use Tye extension to attach debugger to `companion-source-api`. Demonstrate that debugging works (in `WeatherForecastController`).
-6. Use Visual Studio Code "Docker .NET Core Attach (Preview)" debug configuration to debug `companion-containerized-api` service.
-7. Detach debuggers. CTRL+C to cancel `tye run`.
+The solution contains:
+
+* **.vscode/launch.json** - launch configuration for Docker container debugging (used in demo to debug `companion-containerized-api` service).
+* **companion-containerized-api** - a .NET 5 service to generate random weather forecast information. 
+* **companion-source-api** - a .NET 5 service which enriches weather forecast obtained from `companion-containerized-api` service with source information. 
+* **source-api**  - a .NET 5 service which enriches weather forecast obtained from `companion-source-api` service with city information. 
+* **request.http** - a list of requests for the application (used in demo). 
+* **tye.yaml** - configuration of `tye` tool to consume `companion-containerized-api` and `companion-source-api` services as services from the same solution located in separate repository.
+* **tye-external.yaml** - configuration of `tye` tool to consume `companion-containerized-api` and `companion-source-api` services as external services from the different solution, deployed separately.
+
+## Prerequisites
+
+Please ensure to install:
+
+* [REST Client](https://github.com/Huachao/vscode-restclient) extension for Visual Studio Code.
+
+> Developer's comment 
+>
+> This is required to execute requests from `request.http` file.
+
+* [Docker](https://github.com/microsoft/vscode-docker) extension for Visual Studio Code.
+
+> Developer's comment
+> 
+> This is required to debug service containers
+
+* [Project Tye](https://github.com/dotnet/tye) is installed and getting started [tutorial](https://github.com/dotnet/tye/blob/main/docs/tutorials/hello-tye/00_run_locally.md) is finished.
+
+## Demo (Scenario 1)
+
+1. Take a look at `tye.yaml`. 
+    * Pay attention to fixed ports in `bindings` (which are required to simplify demonstration by using `requests.http`). 
+    * Pay attention to `repository` configuration of `companion-source-api`. 
+    * Pay attention to `name` configuration. Demonstrate it matches name in `tye.yaml` of companion solution.
+    * Pay attention to ingress configuration. Describe how it works in `tye run` and `tye deploy`.
+2. Take a look at `source-api/Startup.cs`. 
+    * Pay attention to usage of `tye` configuration extension method.
+3. Execute `tye run` command. 
+    * Pay attention to newly created `.tye/deps` directory. Demonstrate it contains sources of companion solutions.
+4. Open [Project Tye Extension](https://github.com/Microsoft/vscode-tye/). 
+5. Navigate and demonstrate dashboard
+    * Pay attention to ingress.
+6. Open `request.http`. 
+    * Execute request to `companion-containerized-api`.
+    * Execute request to `companion-source-api`.
+    * Execute request to `source-api`.
+    * Pay attention to differences.
+    * Execute request to `companion-source-api` through ingress.
+    * Execute request to `source-api` through ingress. 
+    * Pay attention to `Host` configuration.
+7. Use **Tye Extension** to attach debugger to `companion-source-api`. 
+    * Verify debugger works (in `WeatherForecastController`).
+    * Use Visual Studio Code "Docker .NET Core Attach (Preview)" debug configuration to debug `companion-containerized-api` service.
+    * Detach debuggers. 
+    * CTRL+C to cancel `tye run`.
 8. Execute `tye deploy -i` (specify required container registry).
-9. Use `kubectl` to get services (`kubectl get service`). Pay attention that all services are deployed, including from repository.
-10. Execute requests to deployed `companion-source-api` and `source-api` (from `request.http`).
+9. Use `kubectl` to 
+    * View services 
+        * `kubectl get service`. 
+        * Pay attention that all services are deployed, including `companion-*` services.
+10. Open `request.http`. 
+    * Execute request to deployed `companion-source-api`.
+    * Execute request to deployed `source-api`.
 11. Execute `tye undeploy`.
+
+## Demo (Scenario 2)
+
+Before executing this scenario it is required to have [companion solution](https://github.com/coherentsolutionsinc/dotnet-fwdays-2021-project-tye-to-tie-dotnet-microservices-companion) deployed to same Kubernetes cluster. Please use instructions in repository to do this.
+
+1. Take a look at `tye-external.yaml`. 
+    * Pay attention to fixed ports in `bindings` (which are required to simplify demonstration by using `requests.http`). 
+    * Pay attention to `external` configuration of `companion-source-api`. 
+    * Pay attention to `external/bindings` configuration of `companion-source-api`.
+    * Pay attention to `name` configuration. Demonstrate it doesn't match name in `tye.yaml` of companion solution.
+    * Pay attention to ingress configuration. Describe how it works in `tye run` and `tye deploy`.
+2. Take a look at `source-api/Startup.cs`. 
+    * Pay attention to usage of `tye` configuration extension method.
+3. Execute `tye run tye-external.yaml` command. 
+4. Open [Project Tye Extension](https://github.com/Microsoft/vscode-tye/). 
+5. Navigate and demonstrate dashboard
+    * Pay attention to ingress.
+    * Pay attention to External service.
+6. Open `request.http`. 
+    * Execute request to `companion-source-api` through ingress.
+    * Execute request to `source-api` through ingress. 
+7. CTRL+C to cancel `tye run`.
+8. Execute `tye deploy tye-external.yaml -i`
+    * Specify required container registry.
+    * Specify required secret - put `http://companion-source-api:8800` value. Describe the value.
+9. Open `request.http`. 
+    * Execute request to deployed `source-api`.
+10. Execute `tye undeploy tye-external.yaml`.
