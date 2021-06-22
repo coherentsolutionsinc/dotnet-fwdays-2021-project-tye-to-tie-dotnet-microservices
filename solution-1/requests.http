@@ -2,3 +2,8 @@
 ### obtained from Tye dashboard.
 
 https://localhost:51291/weatherforecast
+
+
+### source-api when port is forwarded
+
+https://localhost:8800/weatherforecast
