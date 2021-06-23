@@ -10,4 +10,13 @@
     <PackageReference Include="Microsoft.Tye.Extensions.Configuration" Version="0.7.0-alpha.21279.2" />
   </ItemGroup>
 
+  <!-- <PropertyGroup>
+    <ContainerBaseImage>mcr.microsoft.com/dotnet/core/sdk</ContainerBaseImage>
+    <ContainerBaseTag>3.1-buster</ContainerBaseTag>
+  </PropertyGroup> -->
+
+  <PropertyGroup>
+    <Version>1.0.1</Version>
+  </PropertyGroup>
+
 </Project>

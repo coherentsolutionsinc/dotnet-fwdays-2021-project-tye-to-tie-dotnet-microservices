@@ -37,6 +37,9 @@ Please ensure to install:
 
 ## Demo
 
+1. Take a look at `source.csproj`.
+    * Pay attention to commented container related properties. Explain them.
+    * Pay attention to `Version` property. Explain it.
 1. Take a look at `tye.yaml`. 
     * Pay attention to fixed ports in `bindings` (which are required to simplify demonstration by using `requests.http`). 
     * Pay attention to `containerPort` configuration.
