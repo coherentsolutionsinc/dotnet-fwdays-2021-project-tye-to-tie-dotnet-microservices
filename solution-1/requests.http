@@ -1,9 +1,9 @@
 ### A template request. The port value has to be replaced with a real port 
 ### obtained from Tye dashboard.
 
-https://localhost:51291/weatherforecast
+http://localhost:52590/weatherforecast
 
 
 ### source-api when port is forwarded
 
-https://localhost:8800/weatherforecast
+http://localhost:8800/weatherforecast

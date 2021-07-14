@@ -48,6 +48,6 @@ Please ensure to install:
     * View services
         * `kubectl get service`
     * Establish port forwarding for `source-api`
-        * `kubectl port-forward svc/source-api 5000:8800`.
+        * `kubectl port-forward svc/source-api 80:8800`.
 15. Open `request.http` and execute request to `source-api`.
 16. Execute `tye undeploy`.
