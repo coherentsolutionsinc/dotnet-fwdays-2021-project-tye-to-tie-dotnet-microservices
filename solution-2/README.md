@@ -37,14 +37,13 @@ Please ensure to install:
 
 ## Demo
 
-1. Take a look at `source.csproj`.
-    * Pay attention to commented container related properties. Explain them.
+1. Take a look at `source-api.csproj`.
     * Pay attention to `Version` property. Explain it.
-1. Take a look at `tye.yaml`. 
+2. Take a look at `source-api/Startup.cs`. 
+    * Pay attention to usage of `tye extension` method for configuration.
+3. Take a look at `tye.yaml`. 
     * Pay attention to fixed ports in `bindings` (which are required to simplify demonstration by using `requests.http`). 
     * Pay attention to `containerPort` configuration.
-3. Take a look at `source-api/Startup.cs`. 
-    * Pay attention to usage of Tye extension method for configuration.
 5. Execute `tye run` command. 
 6. Open [Project Tye Extension](https://github.com/Microsoft/vscode-tye/). 
 7. Navigate and demonstrate dashboard
@@ -54,11 +53,9 @@ Please ensure to install:
     * Execute request to `containerized-api`. 
     * Execute request to `source-api`. 
     * Pay attention to differences.
-11. Use Tye extension to attach debugger to `source-api`. 
-    * Pay attention that currently there is no built in way to attach debugger to container. 
-    * Verify debugger works (in `WeatherForecastController`).
-    * Use Visual Studio Code "Docker .NET Core Attach (Preview)" debug configuration to debug `containerized-api` service.
-    * Detach debuggers. 
+11. Use `tye extension` to attach debugger to `containerized-api`. 
+    * Use Visual Studio Code "Docker .NET Core Attach (Preview)" configuration to attach to `containerized-api` service.
+    * Detach debugger. 
     * CTRL+C to cancel `tye run`.
 15. Execute `tye deploy -i` (specify required container registry).
 16. Use `kubectl` to
