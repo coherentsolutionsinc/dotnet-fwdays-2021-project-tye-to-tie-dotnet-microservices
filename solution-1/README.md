@@ -34,20 +34,20 @@ Please ensure to install:
 3. Open [Project Tye Extension](https://github.com/Microsoft/vscode-tye/). 
 4. Navigate and demonstrate dashboard
     * Pay attention to services bindings.
-    * Pay attention to ability to view logs.
+    * Pay attention to ability to monitor and view logs.
 6. Copy a URL of `api` service from dashboard, paste it to `request.http` and execute it.
 7. Copy a URL of `source-api` service from dashboard, paste it to `request.http` and execute it. 
-8. Use Tye extension to attach debugger to `source-api` and `api`. 
+8. Use `tye extension` to attach debugger to `source-api` and `api`. 
     * Pay attention on how easy it is. 
-    * Verify debugger works (in `WeatherForecastController`).
+    * Verify debugger works (in `WeatherForecastController` of `api` service).
     * Detach debuggers. 
     * CTRL+C to cancel `tye run`.
-11. Execute `tye deploy -i` (specify required container registry).
+11. Execute `tye deploy -i`, explain `-i` parameter (local container registry).
     * Pay attention to absence of `Dockerfile` and Kubernetes `.yaml`.
 13. Use `kubectl` to
     * View services
         * `kubectl get service`
     * Establish port forwarding for `source-api`
-        * `kubectl port-forward svc/source-api 80:8800`.
+        * `kubectl port-forward svc/source-api 8800:80`.
 15. Open `request.http` and execute request to `source-api`.
 16. Execute `tye undeploy`.
