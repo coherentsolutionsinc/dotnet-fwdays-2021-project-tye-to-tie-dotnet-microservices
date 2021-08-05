@@ -24,7 +24,7 @@ namespace Application
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "source_api", Version = "v1" });
             });
-            services.AddHttpClient<WeatherWithSourceClient>(client =>
+            services.AddHttpClient<WeatherWithCityClient>(client =>
             {
                 client.BaseAddress = Configuration.GetServiceUri("companion-source-api");
             });
@@ -41,7 +41,7 @@ namespace Application
             }
 
             app.UseHttpsRedirection();
-
+            
             app.UseRouting();
 
             app.UseAuthorization();
