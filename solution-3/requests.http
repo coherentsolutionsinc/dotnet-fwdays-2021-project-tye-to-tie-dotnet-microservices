@@ -1,9 +1,9 @@
 ### source-api ingress / deployed
-GET http://localhost:80/weatherforecast
+GET http://local-minikube:80/weatherforecast
 Host: app.source-api.com
 
 ### companion-source-api ingress / deployed
-GET http://localhost:80/weatherforecast
+GET http://local-minikube:80/weatherforecast
 Host: app.companion-source-api.com
 
 ### source-api ingress

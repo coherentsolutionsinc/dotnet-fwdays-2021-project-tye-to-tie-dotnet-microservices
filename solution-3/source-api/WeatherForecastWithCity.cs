@@ -2,7 +2,7 @@ using System;
 
 namespace Application
 {
-    public class WeatherForecastWithSource
+    public class WeatherForecastWithCity
     {
         public DateTime Date { get; set; }
 
@@ -12,6 +12,6 @@ namespace Application
 
         public string Summary { get; set; }
         
-        public string Source { get; set; }
+        public string City { get; set; }
     }
 }
